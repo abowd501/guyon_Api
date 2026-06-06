@@ -8,4 +8,8 @@
   "routes": [
     { "src": "/(.*)", "dest": "/api/index.php" }
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3df9d4f26e3a3f369f1a8e971687e392bbd3991e
