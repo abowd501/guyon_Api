@@ -26,6 +26,10 @@ use App\Models\Products;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware('auth:api')->get('/check-token', function (Request $request) {
+    return response()->json(['user' => $request->user()]);
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -48,7 +52,7 @@ Route::middleware(['auth:api'])->group(function (){
     Route::apiresource('product', ProductsController::class);
     Route::get('indexOrder', [App\Http\Controllers\ProductsController::class,'indexOrder']);
 
-    Route::apiresource('order', OrderController::class);
+    Route::apiresource('order', App\Http\Controllers\OrderController::class);
 
     Route::resource('group', App\Http\Controllers\groupsController::class);
     Route::apiresource('follower', App\Http\Controllers\followersController::class);

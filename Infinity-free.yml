@@ -1,0 +1,39 @@
+name: Deploy to InfinityFree
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🧰 Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+
+    - name: 📦 Install dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: 🧹 Prepare deployment folder
+      run: |
+        mkdir deploy
+        cp -r public deploy/
+        cp -r app bootstrap config database resources routes storage vendor deploy/
+        cp .env deploy/
+        cp artisan deploy/
+
+    - name: 🚀 Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_HOSTNAME }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: deploy
+        server-dir: /htdocs/
