@@ -34,6 +34,7 @@ Route::middleware('auth:api')->get('/check-token', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+    Route::get('user',[App\Http\Controllers\usersController::class,'user']);
 
     Route::apiResource('notification',notificationsController::class);
 
@@ -43,7 +44,6 @@ Route::post('register',[App\Http\Controllers\usersController::class,'register'])
 Route::post('login',[App\Http\Controllers\usersController::class,'login']);
 Route::middleware(['auth:api'])->group(function (){
     Route::get('userinfo',[App\Http\Controllers\usersController::class,'userInfo']);
-    Route::get('user',[App\Http\Controllers\usersController::class,'user']);
     Route::post('userupdate',[App\Http\Controllers\usersController::class,'update']);
 
     Route::get('product/search', [ProductsController::class,'search']);
