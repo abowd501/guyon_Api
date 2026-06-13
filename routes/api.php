@@ -35,7 +35,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-    Route::apiResource('notification',notificationsController::class);
 
   Route::resource('ads', App\Http\Controllers\adsController::class); 
 //Route::post('im',[adsController::class,'store']);
@@ -45,6 +44,7 @@ Route::middleware(['auth:api'])->group(function (){
     Route::get('userinfo',[App\Http\Controllers\usersController::class,'userInfo']);
     Route::get('user',[App\Http\Controllers\usersController::class,'user']);
     Route::post('userupdate',[App\Http\Controllers\usersController::class,'update']);
+    Route::apiResource('notification',notificationsController::class);
 
     Route::get('product/search', [ProductsController::class,'search']);
     Route::get('ourproduct/search', [ourProductsController::class,'search']);
