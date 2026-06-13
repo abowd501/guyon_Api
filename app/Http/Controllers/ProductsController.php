@@ -149,7 +149,7 @@ class ProductsController extends Controller
             $dataimage=Images::Create([ 'product_id'=>$data->id,'image'=>$new_image]);
             
         }*/
-        return response()->json(["message"=>"تم الاضافة بنجاح","dataImage"=>count($request->image)],200);
+        return response()->json(["message"=>"تم الاضافةاعلانك تحت المراجعة","dataImage"=>count($request->image)],200);
     }
 
     /**
